@@ -5,7 +5,7 @@ import './index.css'
 import App from './App.jsx'
 
 import { Provider } from 'react-redux'
-import { store } from './app/store'
+import { store } from './store/redux/store'
 /**
  * Entry point aplikasi.
  * BrowserRouter membungkus seluruh App agar React Router bisa digunakan
