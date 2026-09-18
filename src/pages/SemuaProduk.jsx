@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchCourses } from '../features/courses/courseSlice'
 import CourseCard from '../components/CourseCard'
+import '../styles/SemuaProduk.css'
 
 function SemuaProduk() {
   const dispatch = useDispatch()
