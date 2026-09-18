@@ -1,0 +1,283 @@
+/* ============================================
+   Auth.css - Login, Register, Forgot Password
+   ============================================ */
+
+.form-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 1.25rem 2rem;
+  background: #f8fafc;
+}
+
+.form-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: 64px;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.form-logo {
+  font-family: var(--font-header);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--color-star);
+  letter-spacing: -0.02em;
+}
+
+.form-card {
+  width: 100%;
+  max-width: 420px;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 2rem 1.75rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e5e7eb;
+}
+
+.form-card h1 {
+  font-family: var(--font-header);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 0.35rem;
+  text-align: center;
+}
+
+.form-subtitle,
+.subtitle {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: #6b7280;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.form-success {
+  background: #ecfdf5;
+  color: #059669;
+  font-size: 0.875rem;
+  padding: 0.9rem 1rem;
+  border-radius: 10px;
+  margin-bottom: 1.25rem;
+  text-align: center;
+  font-family: var(--font-body);
+  line-height: 1.5;
+}
+
+.required {
+  color: #ef4444;
+}
+
+.field {
+  margin-bottom: 1.1rem;
+}
+
+.field label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 0.35rem;
+}
+
+.field input {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-family: var(--font-body);
+  color: #111827;
+  outline: none;
+  transition: border-color 0.2s;
+  background: #fff;
+}
+
+.field input:focus {
+  border-color: #3ecf4c;
+}
+
+.field input[aria-invalid="true"] {
+  border-color: #ef4444;
+}
+
+.form__error {
+  display: block;
+  font-size: 0.75rem;
+  color: #ef4444;
+  margin-top: 0.3rem;
+  font-family: var(--font-body);
+}
+
+/* Password field with toggle eye */
+.field__password {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.field__password input {
+  padding-right: 2.75rem;
+}
+
+.field__toggle-pw {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 4px;
+  line-height: 1;
+  opacity: 0.6;
+  transition: opacity 0.15s;
+}
+
+.field__toggle-pw:hover {
+  opacity: 1;
+}
+
+/* ===== LUPA PASSWORD (sesuai screenshot) ===== */
+.form-forgot {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+}
+
+.form-forgot a {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #6b7280;
+  transition: color 0.15s;
+}
+
+.form-forgot a:hover {
+  color: #3ecf4c;
+  text-decoration: underline;
+}
+
+/* Phone input with +62 */
+.field__phone {
+  display: flex;
+  align-items: center;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.field__phone:focus-within {
+  border-color: #3ecf4c;
+}
+
+.field__phone-code {
+  padding: 0.7rem 0.75rem;
+  background: #f3f4f6;
+  font-size: 0.9rem;
+  color: #6b7280;
+  font-family: var(--font-body);
+  border-right: 1px solid #e5e7eb;
+  white-space: nowrap;
+}
+
+.field__phone input {
+  border: none;
+  border-radius: 0;
+  flex: 1;
+}
+
+.field__phone input:focus {
+  border: none;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.btn-block {
+  width: 100%;
+  margin-bottom: 0.75rem;
+}
+
+.btn-primary {
+  background: #3ecf4c;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #2db83c;
+}
+
+.btn-secondary {
+  background: #ecfdf5;
+  color: #059669;
+}
+
+.btn-secondary:hover {
+  background: #d1fae5;
+}
+
+.btn-outline {
+  background: #fff;
+  color: #374151;
+  border: 1.5px solid #e5e7eb;
+}
+
+.btn-outline:hover {
+  background: #f9fafb;
+  border-color: #d1d5db;
+}
+
+/* Divider "atau" */
+.form-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1rem 0 1.25rem;
+  color: #9ca3af;
+  font-size: 0.8rem;
+  font-family: var(--font-body);
+}
+
+.form-divider::before,
+.form-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #e5e7eb;
+}
+
+@media (max-width: 480px) {
+  .form-card {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .form-card h1 {
+    font-size: 1.25rem;
+  }
+}

@@ -1,0 +1,133 @@
+/* ============================================
+   CourseSection.css
+   Section koleksi video + filter + grid
+   ============================================ */
+
+.course-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin-bottom: 32px;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 12px;
+  padding-top: 28px;
+  overflow-x: auto;
+}
+
+.course-section__header {
+  background: transparent;
+  color: #4b5563;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 8px 4px 12px;
+  position: relative;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+
+.course-section__title {
+  font-family: var(--font-header);
+  font-size: clamp(1.35rem, 3vw, 1.75rem);
+  font-weight: 800;
+  color: var(--color-dark);
+  margin-bottom: 0.4rem;
+  letter-spacing: -0.01em;
+}
+
+.course-section__subtitle {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+}
+
+/* Filter buttons (pills) */
+.course-section__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin-bottom: 32px;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 12px;
+  overflow-x: auto;
+}
+
+.filter-btn {
+  background: transparent;
+  color: #4b5563;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 8px 4px 12px;
+  position: relative;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+
+.filter-btn:hover {
+  color: var(--color-primary);
+}
+
+.filter-btn.is-active {
+  color: black;
+}
+
+.filter-btn.is-active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #f97316;
+  border-radius: 2px;
+}
+
+/* Grid courses - 3 kolom desktop */
+.course-section__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.course-section__empty {
+  text-align: center;
+  color: var(--color-text-muted);
+  padding: 2rem 0;
+  font-family: var(--font-body);
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 992px) {
+  .course-section__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .course-section {
+    padding: 2.5rem 0 3rem;
+  }
+
+  .course-section__grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .course-section__filters {
+    justify-content: flex-start;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 0.5rem;
+  }
+
+  .filter-btn {
+    flex-shrink: 0;
+  }
+}

@@ -1,0 +1,125 @@
+/* ============================================
+   GLOBAL STYLES - index.css
+   Reset, CSS Variables, Typography dasar
+   ============================================ */
+
+/* CSS Reset sederhana agar konsisten di semua browser */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* CSS Variables (Custom Properties) - mudah diganti di satu tempat */
+:root {
+  /* Warna utama dari design screenshot */
+  --color-primary: #22c55e; /* Hijau tombol CTA */
+  --color-primary-hover: #16a34a;
+  --color-dark: #111827;
+  --color-dark-secondary: #1f2937;
+  --color-text: #1f2937;
+  --color-text-muted: #6b7280;
+  --color-bg: #FEE8D2CC;
+  --color-white: #ffffff;
+  --color-border: #e5e7eb;
+  --color-star: #fbbf24;
+
+  /* Typography */
+  --font-header: 'Poppins', system-ui, sans-serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-size-base: 16px;
+  --line-height: 1.5;
+
+  /* Spacing & Layout */
+  --container-max: 1140px;
+  --header-height: 72px;
+
+  /* Shadow & Radius */
+  --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow-hover: 0 12px 20px -5px rgba(0, 0, 0, 0.1), 0 4px 8px -4px rgba(0, 0, 0, 0.06);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-full: 9999px;
+}
+
+/* Base body */
+html {
+  font-size: var(--font-size-base);
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  line-height: var(--line-height);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+/* Link default */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Gambar responsif by default */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* List reset */
+ul,
+ol {
+  list-style: none;
+}
+
+/* Button reset */
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* Input reset dasar */
+input {
+  font-family: inherit;
+}
+
+/* Container utility - digunakan di hampir semua section */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+/* Utility classes */
+.text-center {
+  text-align: center;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+
+
+/* Pastikan font Inter tersedia (opsional via Google Fonts di index.html) */

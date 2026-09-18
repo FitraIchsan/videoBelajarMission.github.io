@@ -1,0 +1,51 @@
+/* ============================================
+   App.css - Layout utama aplikasi
+   ============================================ */
+
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Main content mengisi sisa ruang antara Header & Footer */
+.main-content {
+  flex: 1;
+}
+
+/* Placeholder page style (untuk route yang belum siap) */
+.placeholder-page {
+  padding: 4rem 0;
+  text-align: center;
+  min-height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.placeholder-page h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: var(--color-dark);
+}
+
+.placeholder-page p {
+  color: var(--color-text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.btn-back {
+  display: inline-block;
+  padding: 0.65rem 1.25rem;
+  background-color: var(--color-primary);
+  color: white;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: background-color 0.2s ease;
+}
+
+.btn-back:hover {
+  background-color: var(--color-primary-hover);
+}
