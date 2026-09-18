@@ -1,16 +1,14 @@
 import { useState, useEffect, useRef } from 'react'
-import { useAuth } from '../context/AuthContext'
 import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { updateProfile } from '../features/auth/authSlice'
 import ProfileSidebar from '../components/ProfileSidebar'
 import userApi from '../api/userApi'
 import './Profil.css'
-import { useSelector } from 'react-redux'
-
-const user = useSelector((state) => state.auth.user)
-const isLoggedIn = Boolean(user)
-
 function Profil() {
-  const { user, isLoggedIn, updateProfile } = useAuth()
+  const dispatch = useDispatch()
+  const user = useSelector((state) => state.auth.user)
+  const isLoggedIn = Boolean(user)
 
   // Referensi untuk input file tersembunyi
   const fileInputRef = useRef(null)
@@ -83,7 +81,7 @@ function Profil() {
       }
 
       // 1. Update state & localStorage lewat AuthContext
-      updateProfile(payload)
+      dispatch(updateProfile(payload))
 
       // 2. (Opsional) Kirim ke MockAPI
       try {

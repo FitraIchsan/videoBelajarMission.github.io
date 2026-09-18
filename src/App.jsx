@@ -1,5 +1,4 @@
 import { Routes, Route, useLocation } from 'react-router-dom'
-import { AuthProvider } from './context/AuthContext'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Home from './pages/Home'
@@ -14,8 +13,7 @@ function App() {
   const isAuthPage = location.pathname === '/login' || location.pathname === '/register'
 
   return (
-    <AuthProvider>
-      <div className="app">
+    <div className="app">
         {!isAuthPage && <Header />}
         <main className="main-content">
           <Routes>
@@ -29,8 +27,7 @@ function App() {
           </Routes>
         </main>
         {!isAuthPage && <Footer />}
-      </div>
-    </AuthProvider>
+    </div>
   )
 }
 

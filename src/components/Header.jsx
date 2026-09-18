@@ -1,8 +1,8 @@
-import { useState, useRef, useEffect, useSelector } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext'
 import '../styles/Header.css'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { logout } from '../features/auth/authSlice'
 
 /**
  * Header.jsx
@@ -13,9 +13,9 @@ import { useSelector } from 'react-redux'
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
-  const { user, isLoggedIn, logout } = useAuth()
-  const userState = useSelector((state) => state.auth.user)
-  const isLoggedInState = Boolean(userState)
+  const dispatch = useDispatch()
+  const user = useSelector((state) => state.auth.user)
+  const isLoggedIn = Boolean(user)
 
   const dropdownRef = useRef(null)
   const toggleMenu = () => setIsMenuOpen((prev) => !prev)
@@ -35,7 +35,7 @@ function Header() {
   }, [])
 
   const handleLogout = () => {
-    logout()
+    dispatch(logout())
     closeDropdown()
     closeMenu()
   }
@@ -50,7 +50,7 @@ function Header() {
 
         {/* Desktop right side */}
         <div className="header__right">
-          {isLoggedInState ? (
+          {isLoggedIn ? (
             /* ===== SUDAH LOGIN ===== */
             <div className="header__logged">
               <Link to="/semua-produk" className="header__kategori" onClick={closeMenu}>
@@ -154,7 +154,7 @@ function Header() {
 
       {/* Mobile menu */}
       <div className={`header__mobile-menu ${isMenuOpen ? 'is-open' : ''}`}>
-        {isLoggedInState ? (
+        {isLoggedIn ? (
           <>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '10px 0' }}>
               <img 

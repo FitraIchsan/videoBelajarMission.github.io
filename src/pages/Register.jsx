@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext'
+import { useDispatch } from 'react-redux'
+import { register } from '../features/auth/authSlice'
 import './Auth.css'
 
 /**
@@ -17,7 +18,7 @@ export default function Register() {
   })
   const [errors, setErrors] = useState({})
   const [showPassword, setShowPassword] = useState(false)
-  const { register } = useAuth()
+  const dispatch = useDispatch()
   const navigate = useNavigate()
 
   function handleChange(e) {
@@ -63,7 +64,7 @@ export default function Register() {
     setErrors(next)
 
     if (Object.keys(next).length === 0) {
-      register({ name: form.name, email: form.email })
+      dispatch(register({ name: form.name, email: form.email, phone: form.phone }))
       navigate('/')
     }
   }

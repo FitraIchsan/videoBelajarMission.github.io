@@ -1,21 +1,12 @@
-import { useEffect } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchCourses } from '../features/courses/courseSlice'
 
-const dispatch = useDispatch()
-const { data: courses, loading, error } = useSelector(
-  (state) => state.courses,
-)
-
-useEffect(() => {
-  dispatch(fetchCourses())
-}, [dispatch])
-
 function SemuaProduk() {
+  const dispatch = useDispatch()
+  const { data: courses, loading } = useSelector((state) => state.courses)
+
   // ===== STATE =====
-  const [allCourses, setAllCourses] = useState([]) // Ubah ke state kosong
-  const [loading, setLoading] = useState(true)     // Tambah state loading
-  
   const [selectedCategories, setSelectedCategories] = useState([])
   const [selectedDurations, setSelectedDurations] = useState([])
   const [sortBy, setSortBy] = useState('default')
@@ -24,22 +15,9 @@ function SemuaProduk() {
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 6
 
-  // Ambil data dari API saat halaman dibuka
   useEffect(() => {
-    const fetchAllCourses = async () => {
-      try {
-        setLoading(true)
-        const data = await courseApi.getAllCourses()
-        setAllCourses(data)
-      } catch (error) {
-        console.error('Gagal memuat semua produk:', error)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchAllCourses()
-  }, [])
+    dispatch(fetchCourses())
+  }, [dispatch])
 
   // Filter sections open/close
   const [openSections, setOpenSections] = useState({
@@ -76,7 +54,7 @@ function SemuaProduk() {
 
   // ===== FILTER + SORT (Aman karena menggunakan useMemo berdasarkan state allCourses) =====
   const filteredCourses = useMemo(() => {
-    let result = [...allCourses]
+    let result = [...courses]
 
     // Search
     if (searchQuery.trim()) {
@@ -121,7 +99,7 @@ function SemuaProduk() {
     }
 
     return result
-  }, [allCourses, selectedCategories, selectedDurations, sortBy, searchQuery])
+  }, [courses, selectedCategories, selectedDurations, sortBy, searchQuery])
 
   // Pagination
   const totalPages = Math.ceil(filteredCourses.length / itemsPerPage) || 1

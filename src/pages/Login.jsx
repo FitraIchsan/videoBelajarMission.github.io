@@ -1,13 +1,7 @@
-import { useDispatch } from 'react-redux'
-import { login } from '../features/auth/authSlice'
-
-const dispatch = useDispatch()
-
-dispatch(login(userData))
-
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext'
+import { useDispatch } from 'react-redux'
+import { login } from '../features/auth/authSlice'
 import './Auth.css'
 
 /**
@@ -20,7 +14,7 @@ export default function Login() {
   const [form, setForm] = useState({ email: '', password: '' })
   const [errors, setErrors] = useState({})
   const [showPassword, setShowPassword] = useState(false)
-  const { login } = useAuth()
+  const dispatch = useDispatch()
   const navigate = useNavigate()
 
   function handleChange(e) {
@@ -52,7 +46,7 @@ export default function Login() {
     setErrors(next)
 
     if (Object.keys(next).length === 0) {
-      login({ email: form.email })
+      dispatch(login({ email: form.email }))
       navigate('/')
     }
   }

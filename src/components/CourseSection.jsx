@@ -1,18 +1,17 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchCourses } from './features/courses/courseSlice'
-
-const dispatch = useDispatch()
-const { data: courses, loading, error } = useSelector(
-  (state) => state.courses,
-)
-
-useEffect(() => {
-  dispatch(fetchCourses())
-}, [dispatch])
+import { fetchCourses } from '../features/courses/courseSlice'
+import CourseCard from './CourseCard'
+import '../styles/CourseSection.css'
 
 function CourseSection() {
+  const dispatch = useDispatch()
+  const { data: courses, loading, error } = useSelector((state) => state.courses)
   const [activeCategory, setActiveCategory] = useState('Semua Kelas')
+
+  useEffect(() => {
+    dispatch(fetchCourses())
+  }, [dispatch])
 
   const categories = [
     'Semua Kelas',
@@ -55,6 +54,8 @@ function CourseSection() {
         {/* Loading State */}
         {loading ? (
           <p className="text-center py-10">Memuat kursus unggulan...</p>
+        ) : error ? (
+          <p className="course-section__empty">Gagal memuat kursus.</p>
         ) : (
           <>
             {/* Grid courses */}
