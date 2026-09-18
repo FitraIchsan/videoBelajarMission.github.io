@@ -1,29 +1,18 @@
-import { useState, useEffect } from 'react'
-import CourseCard from './CourseCard'
-import courseApi from '../api/courseApi' // Import API service
-import '../styles/CourseSection.css'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchCourses } from '../features/courses/courseSlice'
+
+const dispatch = useDispatch()
+const { data: courses, loading, error } = useSelector(
+  (state) => state.courses,
+)
+
+useEffect(() => {
+  dispatch(fetchCourses())
+}, [dispatch])
 
 function CourseSection() {
-  const [courses, setCourses] = useState([]) // Ubah jadi state kosong
-  const [loading, setLoading] = useState(true) // Tambah state loading
   const [activeCategory, setActiveCategory] = useState('Semua Kelas')
-
-  // Ambil data dari API saat komponen dimuat
-  useEffect(() => {
-    const fetchCourses = async () => {
-      try {
-        setLoading(true)
-        const data = await courseApi.getAllCourses()
-        setCourses(data)
-      } catch (error) {
-        console.error('Gagal memuat kursus:', error)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchCourses()
-  }, [])
 
   const categories = [
     'Semua Kelas',

@@ -1,7 +1,15 @@
-import { useState, useEffect, useMemo } from 'react'
-import CourseCard from '../components/CourseCard'
-import courseApi from '../api/courseApi' // Import API service
-import '../styles/SemuaProduk.css'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchCourses } from '../features/courses/courseSlice'
+
+const dispatch = useDispatch()
+const { data: courses, loading, error } = useSelector(
+  (state) => state.courses,
+)
+
+useEffect(() => {
+  dispatch(fetchCourses())
+}, [dispatch])
 
 function SemuaProduk() {
   // ===== STATE =====
