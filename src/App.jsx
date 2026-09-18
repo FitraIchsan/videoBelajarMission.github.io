@@ -6,6 +6,7 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import Profil from './pages/Profil'
 import SemuaProduk from './pages/SemuaProduk'
+import DetailProduk from './pages/DetailProduk'
 import './App.css'
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/semua-produk" element={<SemuaProduk />} />  {/* ← route baru */}
             <Route path="/courses" element={<SemuaProduk />} />       {/* optional: alias */}
+            <Route path="/detail-produk/:id" element={<DetailProduk />} />
             <Route path="*" element={<PlaceholderPage title="404 - Halaman Tidak Ditemukan" />} />
           </Routes>
         </main>

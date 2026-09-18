@@ -273,6 +273,7 @@ function SemuaProduk() {
                   {paginatedCourses.map((course) => (
                     <CourseCard
                       key={course.id}
+                      id={course.id}
                       image={course.image}
                       title={course.title}
                       description={course.description}

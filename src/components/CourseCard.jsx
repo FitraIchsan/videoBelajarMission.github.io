@@ -1,4 +1,5 @@
 import '../styles/CourseCard.css'
+import { Link } from 'react-router-dom'
 
 /**
  * CourseCard.jsx
@@ -16,13 +17,14 @@ import '../styles/CourseCard.css'
  * Supaya bisa dipakai berulang di grid, dan mudah diubah styling-nya di satu tempat.
  * Juga memudahkan nanti kalau mau tambah fitur klik ke detail course.
  */
-function CourseCard({ image, title, description, instructor, rating, price }) {
+function CourseCard({ id, image, title, description, instructor, rating, price }) {
   // Generate bintang berdasarkan rating (sederhana, max 5)
   const fullStars = Math.floor(rating)
   const hasHalf = rating % 1 >= 0.5
 
   return (
-    <article className="course-card">
+    <Link to={`/detail-produk/${id}`} className="course-card-link" aria-label={`Lihat detail ${title}`}>
+      <article className="course-card">
       <div className="course-card__image-wrapper">
         <img
           src={image}
@@ -60,7 +62,8 @@ function CourseCard({ image, title, description, instructor, rating, price }) {
           <div className="course-card__price">{price}</div>
         </div>
       </div>
-    </article>
+      </article>
+    </Link>
   )
 }
 
