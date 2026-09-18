@@ -139,3 +139,19 @@
   color: var(--color-primary);
   white-space: nowrap;
 }
+
+.course-card__actions {
+  display: flex;
+  gap: .5rem;
+  padding: 0 .9rem .9rem;
+}
+
+.course-card__actions button {
+  padding: .35rem .6rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  font-size: .75rem;
+}
+
+.course-card__actions button:last-child { color: #dc2626; }

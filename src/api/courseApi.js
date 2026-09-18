@@ -2,12 +2,23 @@ import axiosClient from './axiosClient';
 
 const courseApi = {
   getAllCourses: async () => {
-    try {
-      const response = await axiosClient.get('/courses');
-      return response.data;
-    } catch (error) {
-      throw error.response?.data || error.message;
-    }
+    const response = await axiosClient.get('/courses')
+    return response.data
+  },
+
+  addCourse: async (courseData) => {
+    const response = await axiosClient.post('/courses', courseData)
+    return response.data
+  },
+
+  updateCourse: async (id, courseData) => {
+    const response = await axiosClient.put(`/courses/${id}`, courseData)
+    return response.data
+  },
+
+  deleteCourse: async (id) => {
+    await axiosClient.delete(`/courses/${id}`)
+    return id
   },
 };
 

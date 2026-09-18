@@ -1,12 +1,26 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchCourses } from '../features/courses/courseSlice'
+import { addCourse, deleteCourse, fetchCourses, updateCourse } from '../features/courses/courseSlice'
 import CourseCard from '../components/CourseCard'
 import '../styles/SemuaProduk.css'
 
 function SemuaProduk() {
   const dispatch = useDispatch()
   const { data: courses, loading } = useSelector((state) => state.courses)
+  const user = useSelector((state) => state.auth.user)
+  const isAdmin = user?.role === 'admin'
+  const [isFormOpen, setIsFormOpen] = useState(false)
+  const [editingCourse, setEditingCourse] = useState(null)
+  const [form, setForm] = useState({
+    title: '',
+    description: '',
+    instructor: '',
+    image: '',
+    category: '',
+    duration: '',
+    rating: '0',
+    price: '',
+  })
 
   // ===== STATE =====
   const [selectedCategories, setSelectedCategories] = useState([])
@@ -20,6 +34,55 @@ function SemuaProduk() {
   useEffect(() => {
     dispatch(fetchCourses())
   }, [dispatch])
+
+  const openAddForm = () => {
+    if (!isAdmin) return
+    setEditingCourse(null)
+    setForm({ title: '', description: '', instructor: '', image: '', category: '', duration: '', rating: '0', price: '' })
+    setIsFormOpen(true)
+  }
+
+  const openEditForm = (id) => {
+    if (!isAdmin) return
+    const course = courses.find((item) => String(item.id) === String(id))
+    if (!course) return
+    setEditingCourse(course)
+    setForm({
+      title: course.title || '',
+      description: course.description || '',
+      instructor: course.instructor || '',
+      image: course.image || '',
+      category: course.category || '',
+      duration: course.duration || '',
+      rating: String(course.rating || 0),
+      price: course.price || '',
+    })
+    setIsFormOpen(true)
+  }
+
+  const handleFormChange = (event) => {
+    const { name, value } = event.target
+    setForm((previous) => ({ ...previous, [name]: value }))
+  }
+
+  const handleFormSubmit = async (event) => {
+    if (!isAdmin) return
+    event.preventDefault()
+    const courseData = { ...form, rating: Number(form.rating) || 0 }
+    if (editingCourse) {
+      await dispatch(updateCourse({ id: editingCourse.id, courseData }))
+    } else {
+      await dispatch(addCourse(courseData))
+    }
+    setIsFormOpen(false)
+  }
+
+  const handleDelete = async (id) => {
+    if (!isAdmin) return
+    if (window.confirm('Hapus kursus ini?')) {
+      await dispatch(deleteCourse(id))
+    }
+  }
 
   // Filter sections open/close
   const [openSections, setOpenSections] = useState({
@@ -216,6 +279,14 @@ function SemuaProduk() {
 
           {/* ===== MAIN CONTENT ===== */}
           <div className="semua-produk__main">
+            {isAdmin && (
+              <div className="course-management-bar">
+                <span>Kelola data kursus</span>
+                <button type="button" className="detail-button" onClick={openAddForm}>
+                  Tambah Kursus
+                </button>
+              </div>
+            )}
             {/* Toolbar: Sort + Search */}
             <div className="semua-produk__toolbar">
               {/* Dropdown Sort (A to Z, Harga, dll) */}
@@ -282,6 +353,8 @@ function SemuaProduk() {
                       rating={course.rating}
                       price={course.price}
                       originalPrice={course.originalPrice}
+                      onEdit={isAdmin ? openEditForm : undefined}
+                      onDelete={isAdmin ? handleDelete : undefined}
                     />
                   ))}
                 </div>
@@ -326,6 +399,38 @@ function SemuaProduk() {
           </div>
         </div>
       </div>
+      {isFormOpen && (
+        <div className="course-form-backdrop" role="presentation">
+          <form className="course-form" onSubmit={handleFormSubmit}>
+            <div className="course-form__header">
+              <h2>{editingCourse ? 'Edit Kursus' : 'Tambah Kursus'}</h2>
+              <button type="button" onClick={() => setIsFormOpen(false)} aria-label="Tutup">×</button>
+            </div>
+            {[
+              ['title', 'Judul kursus'],
+              ['description', 'Deskripsi'],
+              ['instructor', 'Instruktur'],
+              ['image', 'URL gambar'],
+              ['category', 'Kategori'],
+              ['duration', 'Durasi'],
+              ['rating', 'Rating'],
+              ['price', 'Harga'],
+            ].map(([name, label]) => (
+              <label key={name} className="course-form__field">
+                {label}
+                {name === 'description' ? (
+                  <textarea name={name} value={form[name]} onChange={handleFormChange} required />
+                ) : (
+                  <input name={name} type={name === 'rating' ? 'number' : 'text'} min={name === 'rating' ? 0 : undefined} max={name === 'rating' ? 5 : undefined} step={name === 'rating' ? 0.1 : undefined} value={form[name]} onChange={handleFormChange} required={['title', 'description', 'instructor'].includes(name)} />
+                )}
+              </label>
+            ))}
+            <button type="submit" className="detail-button detail-button--full" disabled={loading}>
+              {loading ? 'Menyimpan...' : 'Simpan'}
+            </button>
+          </form>
+        </div>
+      )}
     </div>
   )
 }

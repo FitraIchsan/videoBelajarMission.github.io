@@ -16,6 +16,7 @@ const authSlice = createSlice({
         email: action.payload.email,
         phone: action.payload.phone || '',
         avatar: action.payload.avatar || 'https://i.pravatar.cc/150?img=47',
+        role: action.payload.role || 'user',
       }
 
       state.user = user
@@ -28,6 +29,7 @@ const authSlice = createSlice({
         email: action.payload.email,
         phone: action.payload.phone || '',
         avatar: action.payload.avatar || 'https://i.pravatar.cc/150?img=47',
+        role: action.payload.role || 'user',
       }
 
       state.user = user
