@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchCourses } from '../features/courses/courseSlice'
+import { fetchCourses } from './features/courses/courseSlice'
 
 const dispatch = useDispatch()
 const { data: courses, loading, error } = useSelector(
