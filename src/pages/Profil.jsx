@@ -4,6 +4,10 @@ import { Link } from 'react-router-dom'
 import ProfileSidebar from '../components/ProfileSidebar'
 import userApi from '../api/userApi'
 import './Profil.css'
+import { useSelector } from 'react-redux'
+
+const user = useSelector((state) => state.auth.user)
+const isLoggedIn = Boolean(user)
 
 function Profil() {
   const { user, isLoggedIn, updateProfile } = useAuth()

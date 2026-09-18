@@ -1,3 +1,10 @@
+import { useDispatch } from 'react-redux'
+import { login } from '../features/auth/authSlice'
+
+const dispatch = useDispatch()
+
+dispatch(login(userData))
+
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'

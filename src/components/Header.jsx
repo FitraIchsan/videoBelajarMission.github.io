@@ -1,7 +1,8 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useSelector } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import '../styles/Header.css'
+import { useSelector } from 'react-redux'
 
 /**
  * Header.jsx
@@ -13,6 +14,8 @@ function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const { user, isLoggedIn, logout } = useAuth()
+  const userState = useSelector((state) => state.auth.user)
+  const isLoggedInState = Boolean(userState)
 
   const dropdownRef = useRef(null)
   const toggleMenu = () => setIsMenuOpen((prev) => !prev)
@@ -47,7 +50,7 @@ function Header() {
 
         {/* Desktop right side */}
         <div className="header__right">
-          {isLoggedIn ? (
+          {isLoggedInState ? (
             /* ===== SUDAH LOGIN ===== */
             <div className="header__logged">
               <Link to="/semua-produk" className="header__kategori" onClick={closeMenu}>
@@ -151,7 +154,7 @@ function Header() {
 
       {/* Mobile menu */}
       <div className={`header__mobile-menu ${isMenuOpen ? 'is-open' : ''}`}>
-        {isLoggedIn ? (
+        {isLoggedInState ? (
           <>
             <div style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '10px 0' }}>
               <img 
